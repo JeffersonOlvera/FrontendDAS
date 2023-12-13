@@ -9,13 +9,27 @@ fetch('https://demo-java-spring.onrender.com/actas')
   .then((data) => {
     // Mostrar los datos en el frontend
     const dataContainer = document.getElementById('actasList');
-    const { id, fecha, hora, local, visitante, arbitro, ubicacion } = data;
 
-    // const formattedTime = new Date(time).toLocaleString(); // Formatear la fecha y hora
+    // Iterar sobre cada acta en los datos recibidos
+    data.forEach((acta) => {
+      const {
+        id,
+        fecha,
+        hora,
+        equipoLocal,
+        equipoVisitante,
+        arbitro,
+        ubicacion,
+      } = acta;
 
-    dataContainer.innerHTML = `
-    <p> Acta: ${id}, fecha: ${fecha}, hora: ${hora}, Equipo local: ${local}, Equipo visitante: ${visitante}, Arbitro: ${arbitro}, ubicación: ${ubicacion}  </p>
-  `;
+      // Agregar cada acta al contenedor HTML
+      const actaElement = document.createElement('p');
+      actaElement.innerHTML = `
+        Acta: ${id}, fecha: ${fecha}, hora: ${hora}, Equipo local: ${equipoLocal}, 
+        Equipo visitante: ${equipoVisitante}, Arbitro: ${arbitro}, ubicación: ${ubicacion}
+      `;
+      dataContainer.appendChild(actaElement);
+    });
   })
   .catch((error) => {
     // Manejar errores en caso de que la solicitud falle
