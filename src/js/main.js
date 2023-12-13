@@ -4,19 +4,17 @@ import '../scss/styles.scss';
 // Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap';
 
-fetch('https://demo-java-spring.onrender.com/')
+fetch('https://demo-java-spring.onrender.com/actas')
   .then((response) => response.json()) // Convertir la respuesta a JSON
   .then((data) => {
     // Mostrar los datos en el frontend
-    const dataContainer = document.getElementById('data-container');
-    const { title, message, time } = data;
+    const dataContainer = document.getElementById('actasList');
+    const { id, fecha, hora, local, visitante, arbitro, ubicacion } = data;
 
-    const formattedTime = new Date(time).toLocaleString(); // Formatear la fecha y hora
+    // const formattedTime = new Date(time).toLocaleString(); // Formatear la fecha y hora
 
     dataContainer.innerHTML = `
-    <h2>${title}</h2>
-    <p>${message}</p>
-    <p>Time: ${formattedTime}</p>
+    <p> Acta: ${id}, fecha: ${fecha}, hora: ${hora}, Equipo local: ${local}, Equipo visitante: ${visitante}, Arbitro: ${arbitro}, ubicación: ${ubicacion}  </p>
   `;
   })
   .catch((error) => {
