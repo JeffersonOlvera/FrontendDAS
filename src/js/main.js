@@ -36,17 +36,17 @@ fetch('https://demo-java-spring.onrender.com/actas')
     console.error('Ha ocurrido un error:', error);
   });
 
-// Obtener referencia al formulario y al botón de enviar
-const form = document.getElementById('actaForm');
+// Obtener referencia al botón de enviar
 const submitButton = document.getElementById('submitButton');
+const form = document.getElementById('actaForm');
 
 // Event listener para el clic en el botón
-submitButton.addEventListener('click', function () {
+form.addEventListener('submit', () => {
   // Obtener los valores de los campos del formulario
   const fecha = document.getElementById('inputFecha').value;
   const hora = document.getElementById('inputHora').value;
-  const ubicacion = document.getElementById('inputLocal').value;
-  const equipoLocal = document.getElementById('inputEquipoLocal').value;
+  const ubicacion = document.getElementById('inputUbicacion').value;
+  const equipoLocal = document.getElementById('inputLocal').value;
   const equipoVisitante = document.getElementById('inputVisitante').value;
   const arbitro = document.getElementById('inputArbitro').value;
 
@@ -69,19 +69,11 @@ submitButton.addEventListener('click', function () {
     },
     body: JSON.stringify(formData),
   })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok.');
-      }
-      return response.json();
-    })
-    .then((data) => {
-      // Hacer algo con la respuesta del backend si es necesario
-      console.log('Respuesta del backend:', data);
-      // Aquí puedes actualizar la interfaz o hacer otras acciones en el frontend
+    .then((response) => response.text())
+    .then((result) => {
+      console.log(result); // Puedes hacer algo con el resultado si es necesario
     })
     .catch((error) => {
-      // Manejar errores en caso de que la solicitud falle
       console.error('Error al enviar los datos al backend:', error);
     });
 });
