@@ -52,12 +52,13 @@ submitButton.addEventListener('click', function () {
 
   // Crear un objeto con los datos del formulario
   const formData = {
+    id: 0,
     fecha: fecha,
     hora: hora,
-    ubicacion: ubicacion,
     equipoLocal: equipoLocal,
     equipoVisitante: equipoVisitante,
     arbitro: arbitro,
+    ubicacion: ubicacion,
   };
 
   // Realizar la solicitud POST al backend
